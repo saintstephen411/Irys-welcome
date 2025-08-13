@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Welcome to Irys</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #001f3f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+  }
+
+  #welcomeMessage {
+    font-size: 32px;
+    font-weight: 900;
+    max-width: 90%;
+    opacity: 0;
+    position: relative;
+    color: #00ffff;
+    text-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 40px #00ffff,
+      0 0 80px #00ffff;
+  }
+
+  /* Color pulse cycling through cyan, electric blue, turquoise */
+  @keyframes colorfulPulse {
+    0%, 100% {
+      color: #00ffff;
+      text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff,
+        0 0 80px #00ffff;
+    }
+    33% {
+      color: #0099ff;
+      text-shadow:
+        0 0 8px #0099ff,
+        0 0 15px #0099ff,
+        0 0 30px #0099ff,
+        0 0 50px #0099ff,
+        0 0 100px #0099ff;
+    }
+    66% {
+      color: #00e5c4;
+      text-shadow:
+        0 0 8px #00e5c4,
+        0 0 15px #00e5c4,
+        0 0 30px #00e5c4,
+        0 0 50px #00e5c4,
+        0 0 100px #00e5c4;
+    }
+  }
+
+  /* Lightning flicker effect: rapid subtle opacity changes */
+  @keyframes lightningFlicker {
+    0%, 100% { opacity: 1; }
+    10% { opacity: 0.85; }
+    20% { opacity: 1; }
+    30% { opacity: 0.8; }
+    40% { opacity: 1; }
+    50% { opacity: 0.9; }
+    60% { opacity: 1; }
+    70% { opacity: 0.75; }
+    80% { opacity: 1; }
+    90% { opacity: 0.8; }
+  }
+
+  /* Slide in from left */
+  @keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* Slide in from right */
+  @keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .slide-left {
+    animation:
+      slideInLeft 1s forwards,
+      colorfulPulse 3s infinite alternate,
+      lightningFlicker 1s infinite;
+  }
+
+  .slide-right {
+    animation:
+      slideInRight 1s forwards,
+      colorfulPulse 3s infinite alternate,
+      lightningFlicker 1s infinite;
+  }
+</style>
+</head>
+<body>
+  <div id="welcomeMessage">Loading...</div>
+
+  <script>
+    const messages = [
+      "Hello welcome to Irys the programmable data platform",
+      "This is an appreciation message to all the founders and builders of Irys",
+      "We love you specially JOSH BENARON our ultimate founder, you are forever great❤❤",
+      "We love and appreciate your good work boss XAITOSHI the datapunk😎",
+      "We love you GRIZZLY our famous DC team coordinator and all DC Team in general, GALA, REZ and all team members✌",
+      "Our specialists and community builder DANTASHI we appreciate your good work, QUANG, RETREE and all mod, we appreciate you all💥💥",
+      "And all Irys community in general, specially our senshi and Shihan we love and appreciate your good work and dedication to the systems🤝",
+      "IRYS TGE 32nd of August try and be there and stay Hirys😎",
+      "SAINT STEPHEN CARES ♥"
+    ];
+
+    const welcomeDiv = document.getElementById('welcomeMessage');
+    let index = 0;
+
+    function clearClasses() {
+      welcomeDiv.classList.remove('slide-left', 'slide-right');
+      welcomeDiv.style.opacity = 0;
+    }
+
+    function showMessage() {
+      clearClasses();
+
+      setTimeout(() => {
+        welcomeDiv.textContent = messages[index];
+        if (index % 2 === 0) {
+          welcomeDiv.classList.add('slide-left');
+        } else {
+          welcomeDiv.classList.add('slide-right');
+        }
+        index = (index + 1) % messages.length;
+      }, 1000); // fade out 1s before changing
+    }
+
+    // initial show
+    showMessage();
+
+    // cycle every 6 seconds (5s visible +1s fade)
+    setInterval(showMessage, 6000);
+  </script>
+</body>
+</html>
